@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Язык -->
+<head>
+    <meta charset="UTF-8"> <!-- Устанавливаем кодировку документа -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Указываем браузеру использовать последнюю версию движка рендеринга -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Для мобильных устройств -->
+    <meta name="author" content="Prourzin Pavel"> <!-- Автор -->
+    <meta name="keywords" content="CSS, HTML, 2048, JavaScript"> <!-- Ключевые слова для поиска -->
+    <title>2048 Game</title> <!-- Заголовок страницы -->
+    <link rel="stylesheet" href="main.css"> <!-- Подключаем файл стилей main.css -->
+</head>
+<body>
+    <h1>2048</h1> <!-- Заголовок первого уровня с названием игры -->
+    <div class="score-conteiner"> <!-- Контейнер для отображения счета игры -->
+        <div id="cur_cont">Score : <span id="current-score">0</span></div> <!-- Текущий счёт -->
+        <div id="high_cont">High score: <span id="high-score">0</span></div> <!-- Лучший счёт -->
+        <div id="restart"><img src="C:\Users\prozi\OneDrive\Рабочий стол\2048ориг\rest.png" height="70%" width="70%"></div> <!--Кнопка рестарта-->
+    </div>
+    <div class="Game-board"> <!-- Область игрового поля -->
+        <div class="grid"> <!-- Контейнер с сеткой игровых плиток -->
+            <!-- 16 ячеек (плиток) с указанием их позиции в сетке -->
+            <div class="cap" data-rows="0" data-columns="0"></div>
+            <div class="cap" data-rows="0" data-columns="1"></div>
+            <div class="cap" data-rows="0" data-columns="2"></div>
+            <div class="cap" data-rows="0" data-columns="3"></div>
+            <div class="cap" data-rows="1" data-columns="0"></div>
+            <div class="cap" data-rows="1" data-columns="1"></div>
+            <div class="cap" data-rows="1" data-columns="2"></div>
+            <div class="cap" data-rows="1" data-columns="3"></div>
+            <div class="cap" data-rows="2" data-columns="0"></div>
+            <div class="cap" data-rows="2" data-columns="1"></div>
+            <div class="cap" data-rows="2" data-columns="2"></div>
+            <div class="cap" data-rows="2" data-columns="3"></div>
+            <div class="cap" data-rows="3" data-columns="0"></div>
+            <div class="cap" data-rows="3" data-columns="1"></div>
+            <div class="cap" data-rows="3" data-columns="2"></div>
+            <div class="cap" data-rows="3" data-columns="3"></div>
+        </div>
+    </div>
+
+    <div id="game-over">
+        You lose <!-- Сообщение о проигрыше -->
+        <button id="restart-btn">Restart</button> <!-- Кнопка перезапуска -->
+    </div>
+    <div id="Win-game">
+        You Win<!-- Сообщение о выигрыще -->
+        <button id="restart-btn_">Restart</button> <!-- Кнопка перезапуска -->
+        <button id="resume-btn">Resume</button> <!-- Кнопка продолжения игры -->
+    </div>
+    <script src="scripts.js"></script> <!-- Подключаем внешний файл скриптов scripts.js -->
+</body>
+</html>

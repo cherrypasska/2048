@@ -1,0 +1,296 @@
+/* Определение пользовательского шрифта 'Roca' и
+ его источников с разными форматами. */
+@font-face {
+  font-family: 'Roca';
+  src: local('Roca One Regular'), local('Roca-One-Regular'),
+      url('RocaOne-Rg.woff2') format('woff2'),
+      url('RocaOne-Rg.woff') format('woff'),
+      url('RocaOne-Rg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Обнуление отступов и полей, установка box-sizing в 
+border-box для более предсказуемого поведения при работе 
+с размерами, применение шрифта 'Roca' ко всем элементам. */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Roca;
+}
+
+/* Стилизация тела документа: установка отображения флекс-контейнера 
+с направлением столбца, центрирование по обеим осям, скрытие скроллбара, 
+задание высоты в 100% видимой области, установка цвета фона. */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100vh;
+  background-color: #DBEAFF;
+}
+
+/* Стилизация игровой доски: установка ширины и высоты, 
+границы, скругление углов и скрытие содержимого, 
+выходящего за пределы. */
+.Game-board {
+  width: 450px;
+  height: 450px;
+  border: 6px solid rgb(68, 68, 128);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Определение стилей для сетки игровых плиток: 
+отображение в виде сетки с 4 колонками, с разделителями в 5px. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+
+/* Стилизация игровых плиток: выравнивание по центру,
+ установка размеров, границ, цвета фона, размера шрифта и скругление углов. */
+.cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 106px;
+  height: 106px;
+  border: 1px solid rgb(10, 10, 14);
+  background-color: #B0C4DE;
+  font-size: 2.5em;
+  border-radius: 10px;
+}
+
+/* Стилизация контейнера для отображения счета: установка 
+отображения в виде флекс-контейнера, ширины, высоты, 
+распределения пространства между элементами и цвета фона. */
+.score-conteiner {
+  display: flex;
+  width: 450px;
+  height: 80px;
+  justify-content: space-between;
+  font-size: 20px;
+}
+
+/* Стилизация элементов текущего счета: выравнивание по центру. */
+#current-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стилизация элементов лучшего счета: выравнивание по центру. */
+#high-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стилизация контейнера текущего счета. */
+#cur_cont {
+  background-color: #ABCDEF;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(10, 10, 14);
+  border-radius: 10px;
+  width: 150px;
+  height: 80px;
+}
+
+/* Стилизация контейнера лучшего счета. */
+#high_cont {
+  background-color: #ABCDEF;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(10, 10, 14);
+  border-radius: 10px;
+  width: 200px;
+  height: 80px;
+}
+
+/* Анимация появления элемента. */
+@keyframes appear{
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Анимация движения элементов. */
+@keyframes merge{
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Анимация появления новой плитки. */
+.new-cap {
+  animation: appear 0.3s;
+}
+
+/* Анимация движения плиток. */
+.merged-cap {
+  animation: merge 0.3s;
+}
+
+/* Плавные переходы для трансформации и цвета фона при изменении значения плиток. */
+.grid-cap[data-value] {
+  transition: transform 1.2s, background-color 1.2s;
+}
+
+/* Стили области проигрыша: абсолютное позиционирование в
+центре экрана, задание отступов, прозрачного фона, цвета текста и скрытие изначально. */
+#game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили области победы: абсолютное позиционирование в
+центре экрана, задание отступов, прозрачного фона, цвета текста и скрытие изначально. */
+#Win-game {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Стили кнопки перезапуска: установка отступов, размера, 
+цвета фона, отсутствия границы, курсора и анимации. */
+#restart-btn_ {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  transition: all 0.
+
+3s ease;
+}
+
+/* Стили кнопки возобновления игры: установка отступов, размера, 
+цвета фона, отсутствия границы, курсора и анимации. */
+#resume-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: green;
+  border: none;
+  cursor: pointer;
+  transition: all 0.
+
+3s ease;
+}
+
+
+/* Стили кнопки перезапуска: установка отступов, размера, 
+цвета фона, отсутствия границы, курсора и анимации. */
+#restart-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: red;
+  border: none;
+  cursor: pointer;
+  transition: all 0.
+
+3s ease;
+}
+
+/* Стили кнопки рестарта: установка цвета фона, границы, 
+скругление углов, размеров, выравнивания по центру и курсора. */
+#restart {
+  background-color: #ABCDEF;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Стили для различных значений плиток: установка 
+цвета фона и размера шрифта в зависимости от значения. */
+.cap[data-value="2"] {
+  background-color: #7FB3D5;
+}
+.cap[data-value="4"] {
+  background-color: #A2C4D9;
+}
+.cap[data-value="8"] {
+  background-color: #5C8CA6;
+}
+.cap[data-value="16"] {
+  background-color: #4E7CA4;
+}
+.cap[data-value="32"] {
+  background-color: #345F98;
+}
+.cap[data-value="64"] {
+  background-color: #256D7B;
+}
+.cap[data-value="128"] {
+  background-color: #29AB87;
+}
+.cap[data-value="256"] {
+  background-color: #0ABAB5;
+}
+.cap[data-value="512"] {
+  background-color: #1CAC78;
+}
+.cap[data-value="1024"] {
+  background-color: #0BDA51;
+}
+.cap[data-value="2048"] {
+  background-color: #4CBB17;
+}
+.cap[data-value="4096"] {
+  background-color: #bbad17;
+}
+.cap[data-value="8192"] {
+  background-color: #bb8717;
+}
+.cap[data-value="16384"] {
+  background-color: #bb5017;
+  font-size: 2em;
+}
+.cap[data-value="32768"] {
+  background-color: #bb3817;
+  font-size: 2em;
+}
+.cap[data-value="65536"] {
+  background-color: #bb17ab;
+  font-size: 2em;
+}
